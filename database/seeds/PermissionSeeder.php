@@ -14,6 +14,14 @@ class PermissionSeeder extends Seeder
      */
     public function run()
     {
+        Schema::disableForeignKeyConstraints();
+        DB::table('model_has_roles')->truncate();
+        DB::table('role_has_permissions')->truncate();
+        DB::table('roles')->truncate();
+        DB::table('permissions')->truncate();
+        Schema::enableForeignKeyConstraints();
+
+
         $role1 = Role::create(['name' => 'Admin']);
         $role2 = Role::create(['name' => 'Manager']);
 
@@ -33,6 +41,10 @@ class PermissionSeeder extends Seeder
         Permission::create(['name' => 'units.view']);
         Permission::create(['name' => 'units.edit']);
         Permission::create(['name' => 'units.delete']);
+        Permission::create(['name' => 'products.create']);
+        Permission::create(['name' => 'products.view']);
+        Permission::create(['name' => 'products.edit']);
+        Permission::create(['name' => 'products.delete']);
 
         $role1->givePermissionTo('users.create');
         $role1->givePermissionTo('users.view');
@@ -42,6 +54,18 @@ class PermissionSeeder extends Seeder
         $role1->givePermissionTo('roles.view');
         $role1->givePermissionTo('roles.edit');
         $role1->givePermissionTo('roles.delete');
+        $role1->givePermissionTo('categories.create');
+        $role1->givePermissionTo('categories.view');
+        $role1->givePermissionTo('categories.edit');
+        $role1->givePermissionTo('categories.delete');
+        $role1->givePermissionTo('units.create');
+        $role1->givePermissionTo('units.view');
+        $role1->givePermissionTo('units.edit');
+        $role1->givePermissionTo('units.delete');
+        $role1->givePermissionTo('products.create');
+        $role1->givePermissionTo('products.view');
+        $role1->givePermissionTo('products.edit');
+        $role1->givePermissionTo('products.delete');
 
         $role2->givePermissionTo('users.view');
 

@@ -164,6 +164,43 @@
     </div>
 
 
+    <div class="form-group row">
+        <label for="user" class="col-form-label col-sm-2">Unit</label>
+        <div class="form-check-all col-sm-2">
+            <input class="form-check-input check_all" type="checkbox"
+                   @if (Route::currentRouteName() == 'roles.show') readonly @endif>
+            <label class="form-check-label">Select all</label>
+        </div>
+
+        <div class="col-sm-8 row">
+            <div class="form-check col-sm-3">
+                <input class="form-check-input" type="checkbox" name="permissions[]" value="units.create"
+                       @if(in_array('units.create', $role_permissions)) checked @endif
+                       @if (Route::currentRouteName() == 'roles.show') readonly @endif>
+                <label class="form-check-label">Create</label>
+            </div>
+            <div class="form-check col-sm-3">
+                <input class="form-check-input" type="checkbox" name="permissions[]" value="units.view"
+                       @if(in_array('units.view', $role_permissions)) checked @endif
+                       @if (Route::currentRouteName() == 'roles.show') readonly @endif>
+                <label class="form-check-label">View</label>
+            </div>
+            <div class="form-check col-sm-3">
+                <input class="form-check-input" type="checkbox" name="permissions[]" value="units.edit"
+                       @if(in_array('units.edit', $role_permissions)) checked @endif
+                       @if (Route::currentRouteName() == 'roles.show') readonly @endif>
+                <label class="form-check-label">Update</label>
+            </div>
+            <div class="form-check col-sm-3">
+                <input class="form-check-input" type="checkbox" name="permissions[]" value="units.delete"
+                       @if(in_array('units.delete', $role_permissions)) checked @endif
+                       @if (Route::currentRouteName() == 'roles.show') readonly @endif>
+                <label class="form-check-label">Delete</label>
+            </div>
+        </div>
+    </div>
+
+
 
 
 
