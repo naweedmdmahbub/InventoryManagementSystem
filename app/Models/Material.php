@@ -11,4 +11,14 @@ class Material extends Model
     protected $fillable = [
         'name', 'price', 'sku', 'description', 'category_id', 'unit_id', 'expiry_period', 'image', 'created_by'
     ];
+
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
+
+    public function unit()
+    {
+        return $this->belongsTo(Unit::class);
+    }
 }

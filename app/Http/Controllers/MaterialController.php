@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
+use App\Models\Unit;
 use Illuminate\Http\Request;
 use App\Models\Material;
 use Exception;
@@ -41,9 +43,11 @@ class MaterialController extends Controller
         if (!auth()->user()->can('products.create')) {
             abort(403, 'Unauthorized action.');
         }
+        $categories = Category::all();
+        $units = Unit::all();
 
         $material = new Material();
-        return view('materials.create', compact('material'));
+        return view('materials.create', compact('material','categories','units'));
     }
 
     /**
@@ -59,8 +63,7 @@ class MaterialController extends Controller
         }
 
         try{
-            $input = $request->only('materialname', 'fullname', 'email', 'address', 'phone', 'salary');
-            $input['password'] = bcrypt($request->password);
+            $input = $request->only('name', 'price', 'sku', 'description', 'category_id', 'unit_id', 'expiry_period', 'created_by');
             DB::beginTransaction();
             $material = Material::create($input);
             Toastr::success('Material created successfully','Success');
@@ -84,9 +87,11 @@ class MaterialController extends Controller
         if (!auth()->user()->can('products.view')) {
             abort(403, 'Unauthorized action.');
         }
+        $categories = Category::all();
+        $units = Unit::all();
 
         $material = Material::find($id);
-        return view('materials.view', compact('material'));
+        return view('materials.view', compact('material','categories','units'));
     }
 
     /**
@@ -100,9 +105,11 @@ class MaterialController extends Controller
         if (!auth()->user()->can('products.edit')) {
             abort(403, 'Unauthorized action.');
         }
+        $categories = Category::all();
+        $units = Unit::all();
 
         $material = Material::find($id);
-        return view('materials.edit', compact('material'));
+        return view('materials.edit', compact('material','categories','units'));
     }
 
     /**
@@ -119,7 +126,7 @@ class MaterialController extends Controller
         }
 
         try{
-            $input = $request->only('materialname', 'fullname', 'email', 'address', 'phone', 'salary');
+            $input = $request->only('name', 'price', 'sku', 'description', 'category_id', 'unit_id', 'expiry_period', 'created_by');
             DB::beginTransaction();
             $material = Material::find($id);
             $material->fill($input)->update();
