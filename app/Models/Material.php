@@ -12,6 +12,7 @@ class Material extends Model
         'name', 'price', 'sku', 'description', 'category_id', 'unit_id', 'expiry_period', 'image', 'created_by'
     ];
 
+
     public function category()
     {
         return $this->belongsTo(Category::class);
@@ -20,5 +21,12 @@ class Material extends Model
     public function unit()
     {
         return $this->belongsTo(Unit::class);
+    }
+
+
+
+    public function image()
+    {
+        return $this->morphOne(Image::class, 'imageable');
     }
 }

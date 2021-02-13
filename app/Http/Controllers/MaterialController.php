@@ -4,14 +4,17 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Models\Unit;
+use App\Traits\ImageTrait;
 use Illuminate\Http\Request;
 use App\Models\Material;
 use Exception;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 use Toastr;
 
 class MaterialController extends Controller
 {
+    use ImageTrait;
     public function __construct()
     {
 
@@ -30,6 +33,7 @@ class MaterialController extends Controller
         }
 
         $materials = Material::all();
+//        dd($materials);
         return view('materials.index',compact('materials'));
     }
 
@@ -50,6 +54,7 @@ class MaterialController extends Controller
         return view('materials.create', compact('material','categories','units'));
     }
 
+
     /**
      * Store a newly created resource in storage.
      *
@@ -64,8 +69,16 @@ class MaterialController extends Controller
 
         try{
             $input = $request->only('name', 'price', 'sku', 'description', 'category_id', 'unit_id', 'expiry_period', 'created_by');
+//            dd($request->all(),public_path());
             DB::beginTransaction();
             $material = Material::create($input);
+            if($request->hasFile('image')){
+                $filename = $request->image->getClientOriginalName();
+                $image_upload_path = public_path('\uploads\materials');
+                $request->image->move($image_upload_path, $filename);
+                $this->createImage($filename,$material);
+//                dd($request->all(), $request->file(), $request->image, $filename, public_path(), $extension, $image_upload_path);
+            }
             Toastr::success('Material created successfully','Success');
             DB::commit();
             return redirect()->route('materials.index');
@@ -90,7 +103,7 @@ class MaterialController extends Controller
         $categories = Category::all();
         $units = Unit::all();
 
-        $material = Material::find($id);
+        $material = Material::with('image')->find($id);
         return view('materials.view', compact('material','categories','units'));
     }
 
@@ -108,9 +121,12 @@ class MaterialController extends Controller
         $categories = Category::all();
         $units = Unit::all();
 
-        $material = Material::find($id);
+        $material = Material::with('image')->find($id);
+//        dd($material,$material->image);
+//        dd(public_path('uploads\materials\\').  $material->image->filename);
         return view('materials.edit', compact('material','categories','units'));
     }
+
 
     /**
      * Update the specified resource in storage.
@@ -130,6 +146,22 @@ class MaterialController extends Controller
             DB::beginTransaction();
             $material = Material::find($id);
             $material->fill($input)->update();
+            //Only deleting image when new image is selected.
+            // When no new image is selected, image remains the same, that means no delete option for image only.
+            if($request->hasFile('image')){
+                $prev_image =  $material->image;
+                if($prev_image){
+                    $path = public_path('\uploads\materials\\').$prev_image->filename;
+                    if(file_exists($path)) {
+                        unlink($path);
+                        $prev_image->delete();
+                    }
+                }
+                $filename = $request->image->getClientOriginalName();
+                $image_upload_path = public_path('\uploads\materials');
+                $request->image->move($image_upload_path, $filename);
+                $this->createImage($filename,$material);
+            }
             Toastr::success('Material updated successfully','Success');
             DB::commit();
             return redirect()->route('materials.index');
@@ -147,12 +179,6 @@ class MaterialController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
-    {
-        //
-    }
-
-
     public function delete($id)
     {
         if (!auth()->user()->can('products.delete')) {
@@ -160,6 +186,14 @@ class MaterialController extends Controller
         }
 
         $material = Material::find($id);
+        $image =  $material->image;
+        if($image){
+            $path = public_path('\uploads\materials\\').$image->filename;
+            if(file_exists($path)) {
+                unlink($path);
+                $image->delete();
+            }
+        }
         $material->delete();
         Toastr::success('Material deleted successfully','Success');
         return [

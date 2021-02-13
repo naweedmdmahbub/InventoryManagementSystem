@@ -40,7 +40,7 @@
                     </div>
                 @endif
 
-                <form class="form-horizontal" action="{{ route('materials.update', $material->id) }}" method="POST">
+                <form class="form-horizontal" action="{{ route('materials.update', $material->id) }}"  enctype="multipart/form-data" method="POST">
                     {{ csrf_field() }}
                     {{method_field('PATCH')}}
                     @include('materials.form')

@@ -22,7 +22,6 @@ class CreateMaterialsTable extends Migration
             $table->unsignedInteger('category_id')->nullable();
             $table->unsignedInteger('unit_id')->nullable();
             $table->string('expiry_period')->nullable();
-            $table->string('image')->nullable();
             $table->unsignedInteger('created_by')->nullable();
             $table->timestamps();
             $table->softDeletes();

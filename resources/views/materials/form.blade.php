@@ -44,8 +44,6 @@
     </div>
 
 
-
-
     <div class="form-group row">
         <label for="category" class="col-sm-2 col-form-label">Category</label>
         @if (Route::currentRouteName() == 'materials.show')
@@ -90,6 +88,26 @@
         @endif
     </div>
 
+
+    <div class="form-group row">
+        <label for="image" class="col-sm-2 col-form-label">Image</label>
+        <div class="col-sm-10">
+            @if (Route::currentRouteName() == 'materials.create' || Route::currentRouteName() == 'materials.edit')
+                <input type="file" class="form-control" name="image" placeholder="Image">
+                @if($material->image)
+                    <img src="{{asset('uploads\materials\\').  $material->image->filename}}" alt="Image"
+                         style="width:200px;height:200px;">
+                @endif
+            @else
+                @if($material->image)
+                    <img src="{{asset('uploads\materials\\').  $material->image->filename}}" alt="Image"
+                         style="width:200px;height:200px;">
+                @else
+                    <input type="text" class="form-control" readonly>
+                @endif
+            @endif
+        </div>
+    </div>
 
 </div>
 <!-- /.card-body -->

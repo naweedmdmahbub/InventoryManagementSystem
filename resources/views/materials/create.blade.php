@@ -40,7 +40,7 @@
                     </div>
                 @endif
 
-                <form class="form-horizontal" action="{{ route('materials.store') }}" method="POST">
+                <form class="form-horizontal" action="{{ route('materials.store') }}" enctype="multipart/form-data" method="POST">
                     {{ csrf_field() }}
                     @include('materials.form')
 
