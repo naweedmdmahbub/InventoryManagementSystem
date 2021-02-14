@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreUpdateMaterialRequest;
 use App\Models\Category;
 use App\Models\Unit;
 use App\Traits\ImageTrait;
@@ -61,14 +62,15 @@ class MaterialController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreUpdateMaterialRequest $request)
     {
         if (!auth()->user()->can('products.create')) {
             abort(403, 'Unauthorized action.');
         }
 
         try{
-            $input = $request->only('name', 'price', 'sku', 'description', 'category_id', 'unit_id', 'expiry_period', 'created_by');
+            $input = $request->only('name', 'price', 'sku', 'description', 'category_id', 'unit_id', 'expiry_period');
+            $input['created_by'] = auth()->user()->id;
 //            dd($request->all(),public_path());
             DB::beginTransaction();
             $material = Material::create($input);
@@ -104,6 +106,10 @@ class MaterialController extends Controller
         $units = Unit::all();
 
         $material = Material::with('image')->find($id);
+        if (!$material){
+            Toastr::warning('Material View Failed');
+            return redirect('materials');
+        }
         return view('materials.view', compact('material','categories','units'));
     }
 
@@ -122,8 +128,11 @@ class MaterialController extends Controller
         $units = Unit::all();
 
         $material = Material::with('image')->find($id);
-//        dd($material,$material->image);
-//        dd(public_path('uploads\materials\\').  $material->image->filename);
+        if (!$material){
+            Toastr::warning('Material Edit Failed');
+            return redirect('materials');
+        }
+//        dd($material,$material->image,public_path('uploads\materials\\').  $material->image->filename);
         return view('materials.edit', compact('material','categories','units'));
     }
 
@@ -135,7 +144,7 @@ class MaterialController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(StoreUpdateMaterialRequest $request, $id)
     {
         if (!auth()->user()->can('products.edit')) {
             abort(403, 'Unauthorized action.');
