@@ -99,6 +99,41 @@
                     </li>
                 @endif
 
+
+
+                @if(Auth::guard('web')->check())
+                    <li class="nav-item has-treeview">
+                        <a href="#" class="nav-link">
+                            <i class="nav-icon fas fa-table"></i>
+                            <p>Project Management<i class="fas fa-angle-left right"></i></p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="{{ route('projects.index') }}" class="nav-link">
+                                    <i class="fas fa-list"></i>
+                                    <p>Projects</p>
+                                </a>
+                            </li>
+                        </ul>
+                        {{--<ul class="nav nav-treeview">--}}
+                            {{--<li class="nav-item">--}}
+                                {{--<a href="{{ route('project_users.index') }}" class="nav-link">--}}
+                                    {{--<i class="fas fa-list"></i>--}}
+                                    {{--<p>Project Users</p>--}}
+                                {{--</a>--}}
+                            {{--</li>--}}
+                        {{--</ul>--}}
+                        {{--<ul class="nav nav-treeview">--}}
+                            {{--<li class="nav-item">--}}
+                                {{--<a href="{{ route('materials.index') }}" class="nav-link">--}}
+                                    {{--<i class="fas fa-list"></i>--}}
+                                    {{--<p>Materials</p>--}}
+                                {{--</a>--}}
+                            {{--</li>--}}
+                        {{--</ul>--}}
+                    </li>
+                @endif
+
             </ul>
         </nav>
         <!-- /.sidebar-menu -->

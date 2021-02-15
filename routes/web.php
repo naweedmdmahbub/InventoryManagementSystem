@@ -30,6 +30,8 @@ Route::group(['middleware' => ['auth']], function() {
     Route::post('/units/delete/{id}', 'UnitController@delete')->name('units.delete');
     Route::resource('materials', 'MaterialController');
     Route::post('/materials/delete/{id}', 'MaterialController@delete')->name('materials.delete');
+    Route::resource('projects', 'ProjectController');
+    Route::post('/projects/delete/{id}', 'ProjectController@delete')->name('projects.delete');
 
 });
 

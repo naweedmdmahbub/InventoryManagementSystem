@@ -34,7 +34,6 @@ class MaterialController extends Controller
         }
 
         $materials = Material::all();
-//        dd($materials);
         return view('materials.index',compact('materials'));
     }
 
