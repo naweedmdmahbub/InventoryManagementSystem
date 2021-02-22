@@ -96,6 +96,22 @@
                                 </a>
                             </li>
                         </ul>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="{{ route('structures.index') }}" class="nav-link">
+                                    <i class="fas fa-list"></i>
+                                    <p>Structures</p>
+                                </a>
+                            </li>
+                        </ul>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="{{ route('works.index') }}" class="nav-link">
+                                    <i class="fas fa-list"></i>
+                                    <p>Works</p>
+                                </a>
+                            </li>
+                        </ul>
                     </li>
                 @endif
 

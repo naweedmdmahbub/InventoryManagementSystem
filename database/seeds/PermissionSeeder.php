@@ -48,10 +48,18 @@ class PermissionSeeder extends Seeder
 //        Permission::create(['name' => 'products.view']);
 //        Permission::create(['name' => 'products.edit']);
 //        Permission::create(['name' => 'products.delete']);
-        Permission::create(['name' => 'projects.create']);
-        Permission::create(['name' => 'projects.view']);
-        Permission::create(['name' => 'projects.edit']);
-        Permission::create(['name' => 'projects.delete']);
+//        Permission::create(['name' => 'projects.create']);
+//        Permission::create(['name' => 'projects.view']);
+//        Permission::create(['name' => 'projects.edit']);
+//        Permission::create(['name' => 'projects.delete']);
+        Permission::create(['name' => 'structures.create']);
+        Permission::create(['name' => 'structures.view']);
+        Permission::create(['name' => 'structures.edit']);
+        Permission::create(['name' => 'structures.delete']);
+        Permission::create(['name' => 'works.create']);
+        Permission::create(['name' => 'works.view']);
+        Permission::create(['name' => 'works.edit']);
+        Permission::create(['name' => 'works.delete']);
 
 //        $role1->givePermissionTo('users.create');
 //        $role1->givePermissionTo('users.view');
@@ -73,10 +81,18 @@ class PermissionSeeder extends Seeder
 //        $role1->givePermissionTo('products.view');
 //        $role1->givePermissionTo('products.edit');
 //        $role1->givePermissionTo('products.delete');
-        $role1->givePermissionTo('projects.create');
-        $role1->givePermissionTo('projects.view');
-        $role1->givePermissionTo('projects.edit');
-        $role1->givePermissionTo('projects.delete');
+//        $role1->givePermissionTo('projects.create');
+//        $role1->givePermissionTo('projects.view');
+//        $role1->givePermissionTo('projects.edit');
+//        $role1->givePermissionTo('projects.delete');
+        $role1->givePermissionTo('structures.create');
+        $role1->givePermissionTo('structures.view');
+        $role1->givePermissionTo('structures.edit');
+        $role1->givePermissionTo('structures.delete');
+        $role1->givePermissionTo('works.create');
+        $role1->givePermissionTo('works.view');
+        $role1->givePermissionTo('works.edit');
+        $role1->givePermissionTo('works.delete');
 
 //        $role2->givePermissionTo('users.view');
 
