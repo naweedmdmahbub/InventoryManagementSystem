@@ -79,32 +79,24 @@
                                     <p>Categories</p>
                                 </a>
                             </li>
-                        </ul>
-                        <ul class="nav nav-treeview">
                             <li class="nav-item">
                                 <a href="{{ route('units.index') }}" class="nav-link">
                                     <i class="fas fa-list"></i>
                                     <p>Units</p>
                                 </a>
                             </li>
-                        </ul>
-                        <ul class="nav nav-treeview">
                             <li class="nav-item">
                                 <a href="{{ route('materials.index') }}" class="nav-link">
                                     <i class="fas fa-list"></i>
                                     <p>Materials</p>
                                 </a>
                             </li>
-                        </ul>
-                        <ul class="nav nav-treeview">
                             <li class="nav-item">
                                 <a href="{{ route('structures.index') }}" class="nav-link">
                                     <i class="fas fa-list"></i>
                                     <p>Structures</p>
                                 </a>
                             </li>
-                        </ul>
-                        <ul class="nav nav-treeview">
                             <li class="nav-item">
                                 <a href="{{ route('works.index') }}" class="nav-link">
                                     <i class="fas fa-list"></i>
