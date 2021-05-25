@@ -122,23 +122,13 @@
                                     <p>Projects</p>
                                 </a>
                             </li>
+                            <li class="nav-item">
+                                <a href="{{ route('project_users.index') }}" class="nav-link">
+                                    <i class="fas fa-list"></i>
+                                    <p>Project Users</p>
+                                </a>
+                            </li>
                         </ul>
-                        {{--<ul class="nav nav-treeview">--}}
-                            {{--<li class="nav-item">--}}
-                                {{--<a href="{{ route('project_users.index') }}" class="nav-link">--}}
-                                    {{--<i class="fas fa-list"></i>--}}
-                                    {{--<p>Project Users</p>--}}
-                                {{--</a>--}}
-                            {{--</li>--}}
-                        {{--</ul>--}}
-                        {{--<ul class="nav nav-treeview">--}}
-                            {{--<li class="nav-item">--}}
-                                {{--<a href="{{ route('materials.index') }}" class="nav-link">--}}
-                                    {{--<i class="fas fa-list"></i>--}}
-                                    {{--<p>Materials</p>--}}
-                                {{--</a>--}}
-                            {{--</li>--}}
-                        {{--</ul>--}}
                     </li>
                 @endif
 

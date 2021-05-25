@@ -37,6 +37,9 @@ Route::group(['middleware' => ['auth']], function() {
     Route::resource('works', 'WorkController');
     Route::post('/works/delete/{id}', 'WorkController@delete')->name('works.delete');
 
+    Route::resource('project_users', 'ProjectUserController');
+    Route::post('/project_users/delete/{id}', 'ProjectUserController@delete')->name('project_user.delete');
+
 });
 
 //Route::resource('users', 'UserController')->middleware('web');

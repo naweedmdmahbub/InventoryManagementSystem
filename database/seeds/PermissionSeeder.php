@@ -22,8 +22,22 @@ class PermissionSeeder extends Seeder
 //        Schema::enableForeignKeyConstraints();
 //
 //
-//        $role1 = Role::create(['name' => 'Admin']);
-//        $role2 = Role::create(['name' => 'Manager']);
+        $role1 = Role::create(['name' => 'Admin']);
+        $role2 = Role::create(['name' => 'Project Coordinator']);
+        $role3 = Role::create(['name' => 'Chief Accountant']);
+
+        $role4 = Role::create(['name' => 'Project Manager#1']);
+        $role5 = Role::create(['name' => 'Site Engineer#1']);
+        $role6 = Role::create(['name' => 'Site Accountant#1']);
+        $role7 = Role::create(['name' => 'Site Supervisor#1']);
+        $role8 = Role::create(['name' => 'Subcontractor#1']);
+        $role9 = Role::create(['name' => 'Labourer#1']);
+        $role4 = Role::create(['name' => 'Project Manager#2']);
+        $role5 = Role::create(['name' => 'Site Engineer#2']);
+        $role6 = Role::create(['name' => 'Site Accountant#2']);
+        $role7 = Role::create(['name' => 'Site Supervisor#2']);
+        $role8 = Role::create(['name' => 'Subcontractor#2']);
+        $role9 = Role::create(['name' => 'Labourer#2']);
 
         $role1 = Role::find(1);
         $role2 = Role::find(2);
@@ -52,14 +66,15 @@ class PermissionSeeder extends Seeder
 //        Permission::create(['name' => 'projects.view']);
 //        Permission::create(['name' => 'projects.edit']);
 //        Permission::create(['name' => 'projects.delete']);
-        Permission::create(['name' => 'structures.create']);
-        Permission::create(['name' => 'structures.view']);
-        Permission::create(['name' => 'structures.edit']);
-        Permission::create(['name' => 'structures.delete']);
-        Permission::create(['name' => 'works.create']);
-        Permission::create(['name' => 'works.view']);
-        Permission::create(['name' => 'works.edit']);
-        Permission::create(['name' => 'works.delete']);
+//        Permission::create(['name' => 'structures.create']);
+//        Permission::create(['name' => 'structures.view']);
+//        Permission::create(['name' => 'structures.edit']);
+//        Permission::create(['name' => 'structures.delete']);
+//        Permission::create(['name' => 'works.create']);
+//        Permission::create(['name' => 'works.view']);
+//        Permission::create(['name' => 'works.edit']);
+//        Permission::create(['name' => 'works.delete']);
+
 
 //        $role1->givePermissionTo('users.create');
 //        $role1->givePermissionTo('users.view');
@@ -85,19 +100,19 @@ class PermissionSeeder extends Seeder
 //        $role1->givePermissionTo('projects.view');
 //        $role1->givePermissionTo('projects.edit');
 //        $role1->givePermissionTo('projects.delete');
-        $role1->givePermissionTo('structures.create');
-        $role1->givePermissionTo('structures.view');
-        $role1->givePermissionTo('structures.edit');
-        $role1->givePermissionTo('structures.delete');
-        $role1->givePermissionTo('works.create');
-        $role1->givePermissionTo('works.view');
-        $role1->givePermissionTo('works.edit');
-        $role1->givePermissionTo('works.delete');
+//        $role1->givePermissionTo('structures.create');
+//        $role1->givePermissionTo('structures.view');
+//        $role1->givePermissionTo('structures.edit');
+//        $role1->givePermissionTo('structures.delete');
+//        $role1->givePermissionTo('works.create');
+//        $role1->givePermissionTo('works.view');
+//        $role1->givePermissionTo('works.edit');
+//        $role1->givePermissionTo('works.delete');
 
 //        $role2->givePermissionTo('users.view');
 
-//        User::find(1)->assignRole($role1);
-//        User::find(2)->assignRole($role2);
+        User::find(1)->assignRole($role1);
+        User::find(2)->assignRole($role2);
 
 //        $role1 = Role::find(1);
 

@@ -165,7 +165,7 @@
 
 
     <div class="form-group row">
-        <label for="user" class="col-form-label col-sm-2">Material</label>
+        <label for="user" class="col-form-label col-sm-2">Product</label>
         <div class="form-check-all col-sm-2">
             <input class="form-check-input check_all" type="checkbox"
                    @if (Route::currentRouteName() == 'roles.show') readonly @endif>
@@ -174,26 +174,26 @@
 
         <div class="col-sm-8 row">
             <div class="form-check col-sm-3">
-                <input class="form-check-input" type="checkbox" name="permissions[]" value="materials.create"
-                       @if(in_array('materials.create', $role_permissions)) checked @endif
+                <input class="form-check-input" type="checkbox" name="permissions[]" value="products.create"
+                       @if(in_array('products.create', $role_permissions)) checked @endif
                        @if (Route::currentRouteName() == 'roles.show') readonly @endif>
                 <label class="form-check-label">Create</label>
             </div>
             <div class="form-check col-sm-3">
-                <input class="form-check-input" type="checkbox" name="permissions[]" value="materials.view"
-                       @if(in_array('materials.view', $role_permissions)) checked @endif
+                <input class="form-check-input" type="checkbox" name="permissions[]" value="products.view"
+                       @if(in_array('products.view', $role_permissions)) checked @endif
                        @if (Route::currentRouteName() == 'roles.show') readonly @endif>
                 <label class="form-check-label">View</label>
             </div>
             <div class="form-check col-sm-3">
-                <input class="form-check-input" type="checkbox" name="permissions[]" value="materials.edit"
-                       @if(in_array('materials.edit', $role_permissions)) checked @endif
+                <input class="form-check-input" type="checkbox" name="permissions[]" value="products.edit"
+                       @if(in_array('products.edit', $role_permissions)) checked @endif
                        @if (Route::currentRouteName() == 'roles.show') readonly @endif>
                 <label class="form-check-label">Update</label>
             </div>
             <div class="form-check col-sm-3">
-                <input class="form-check-input" type="checkbox" name="permissions[]" value="materials.delete"
-                       @if(in_array('materials.delete', $role_permissions)) checked @endif
+                <input class="form-check-input" type="checkbox" name="permissions[]" value="products.delete"
+                       @if(in_array('products.delete', $role_permissions)) checked @endif
                        @if (Route::currentRouteName() == 'roles.show') readonly @endif>
                 <label class="form-check-label">Delete</label>
             </div>
