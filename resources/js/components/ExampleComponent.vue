@@ -4,6 +4,7 @@
             <div class="col-md-8">
                 <div class="card">
                     <div class="card-header">Example Component</div>
+                    <order-list></order-list>
 
                     <div class="card-body">
                         I'm an example component.
@@ -15,7 +16,9 @@
 </template>
 
 <script>
+    import OrderList from './Orders/List.vue';
     export default {
+        components: { OrderList },
         mounted() {
             console.log('Component mounted.')
         }

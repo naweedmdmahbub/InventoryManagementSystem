@@ -18,7 +18,7 @@
     </section>
 
     <!-- Main content -->
-    <section class="content">
+    {{-- <section class="content">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-12">
@@ -26,7 +26,7 @@
                     <div class="card">
                         <div class="card-header">
                             <h3 class="card-title">Orders List</h3>
-                            @can('orders.create')
+                            @can('products.create')
                                 <div style="text-align: right">
                                     <a class="btn btn-default" href="{{route('orders.create')}}">
                                         <i class="fa fa-plus"></i> Add Order
@@ -40,36 +40,35 @@
                                 <thead>
                                     <tr>
                                         <th>Name</th>
-                                        <th>Description</th>
-                                        <th>Structure</th>
-                                        <th>Unit</th>
                                         <th>Price</th>
-                                        <th>Rate</th>
-                                        <th>Quantity</th>
+                                        <th>SKU</th>
+                                        <th>Description</th>
+                                        <th>Category</th>
+                                        <th>Unit</th>
+                                        <th>Expiry Period</th>
                                         @if(auth('web'))
                                             <th>Options</th>
                                         @endif
                                     </tr>
                                 </thead>
                                 <tbody>
-                                {{--@php dd($orders); @endphp--}}
                                 @foreach($orders  as $order)
                                     <tr>
                                         <td>{{ $order->name }}</td>
-                                        <td>{{ $order->description }}</td>
-                                        <td>{{ $order->structure ? $order->structure->name :''}}</td>
-                                        <td>{{ $order->unit ? $order->unit->name :''}}</td>
                                         <td>{{ $order->price }}</td>
-                                        <td>{{ $order->rate }}</td>
-                                        <td>{{ $order->quantity }}</td>
+                                        <td>{{ $order->sku }}</td>
+                                        <td>{{ $order->description }}</td>
+                                        <td>{{ $order->category ? $order->category->name :''}}</td>
+                                        <td>{{ $order->unit ? $order->unit->name :''}}</td>
+                                        <td>{{ $order->expiry_period }}</td>
                                         <td>
-                                            @can('orders.view')
+                                            @can('products.view')
                                                 <a href="{{ route('orders.show',$order->id) }}" class="btn btn-warning">View</a>
                                             @endcan
-                                            @can('orders.edit')
+                                            @can('products.edit')
                                                 <a href="{{ route('orders.edit',$order->id) }}" class="btn btn-info">Edit</a>
                                             @endcan
-                                            @can('orders.delete')
+                                            @can('products.delete')
                                                 <button class="btn btn-danger delete-confirm" data-id="{{ $order->id }}">Delete</button>
                                             @endcan
                                         </td>
@@ -86,8 +85,17 @@
                 <!-- /.col -->
             </div>
             <!-- /.row -->
-        </div>
+        </div> --}}
         <!-- /.container-fluid -->
+
+
+
+
+        <div id="app">
+            <router-view test="test"></router-view>
+            {{-- <order-list></order-list>
+            <order-create></order-create> --}}
+        </div>
     </section>
     <!-- /.content -->
 
@@ -96,47 +104,11 @@
 
     <!-- page script -->
     <script>
-        $(function () {
-            $("#example1").DataTable({
-                "responsive": true,
-                "autoWidth": false,
-            });
-        });
-
-        $(".delete-confirm").click(function () {
-            var id = $(this).data("id");
-            console.log('Clicking Delete',id);
-
-            $.confirm({
-                title: 'Warning!',
-                icon: 'fa fa-warning',
-                content: 'Are you sure? You wont be able to revert this!',
-                type: 'red',
-                typeAnimated: true,
-                buttons: {
-                    tryAgain: {
-                        text: 'Click Here',
-                        btnClass: 'btn-red',
-                        action: function(){
-                            $.ajax({
-                                method: 'POST',
-                                headers: {'X-CSRF-TOKEN': '{{ csrf_token() }}'},
-                                url: '/orders/delete/' + id,
-                                success: function (response) {
-                                    if(response.msg){
-                                        console.log(response.msg,"ajax success response.msg")
-                                        location.reload()
-                                    }
-                                }
-                            })
-                        }
-                    },
-                    close: function () {
-                    }
-                }
-            });
-        });
     </script>
+
+    
+    <!-- vue script -->
+    <script src="{{ mix('/js/app.js') }}"></script>
 
 
 @endsection

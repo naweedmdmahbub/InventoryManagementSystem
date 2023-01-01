@@ -4,7 +4,7 @@
  * building robust, powerful web applications using Vue and Laravel.
  */
 
-require('./bootstrap');
+require('../bootstrap');
 
 window.Vue = require('vue');
 
@@ -23,12 +23,12 @@ Vue.use(Element)
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
-Vue.component('example-component', require('./components/ExampleComponent.vue').default);
+Vue.component('example-component', require('../components/ExampleComponent.vue').default);
 
-Vue.component('order-list', require('./components/Orders/List.vue').default);
-Vue.component('order-create', require('./components/Orders/Create.vue').default);
+Vue.component('order-list', require('../components/Orders/List.vue').default);
+Vue.component('order-create', require('../components/Orders/Create.vue').default);
 // Vue.component('order-edit', require('./components/Orders/Edit.vue').default);
-Vue.component('order-form', require('./components/Orders/Form.vue').default);
+Vue.component('order-form', require('../components/Orders/Form.vue').default);
 
 
 /**
@@ -37,9 +37,6 @@ Vue.component('order-form', require('./components/Orders/Form.vue').default);
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-import router from './router.js'
-console.log('App router:', router, router.app);
 const app = new Vue({
-    el: '#app',
-    router
+    el: '#order-list',
 });
