@@ -18,8 +18,8 @@
     </section>
 
     <!-- Main content -->
-    {{-- <section class="content">
-        <div class="container-fluid">
+    <section class="content">
+        {{-- <div class="container-fluid">
             <div class="row">
                 <div class="col-12">
 
@@ -89,17 +89,11 @@
         <!-- /.container-fluid -->
 
 
-
-
         <div id="app">
             <router-view test="test"></router-view>
-            {{-- <order-list></order-list>
-            <order-create></order-create> --}}
         </div>
     </section>
     <!-- /.content -->
-
-
 
 
     <!-- page script -->

@@ -18,7 +18,7 @@ class CreateOrdersTable extends Migration
             $table->string('date');
             $table->unsignedInteger('project_id');
             $table->unsignedInteger('supplier_id');
-            $table->string('payement_status');
+            $table->string('payment_status');
             $table->string('purchase_status')->nullable();
             $table->double('total')->nullable();
             $table->double('paid')->nullable();

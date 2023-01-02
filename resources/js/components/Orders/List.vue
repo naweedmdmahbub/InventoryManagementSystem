@@ -1,53 +1,87 @@
 <template>
-  <el-table
-    :data="tableData"
-    style="width: 100%">
-    <el-table-column
-      fixed
-      prop="date"
-      label="Date"
-      width="150">
-    </el-table-column>
-    <el-table-column
-      prop="name"
-      label="Name"
-      width="120">
-    </el-table-column>
-    <el-table-column
-      prop="state"
-      label="State"
-      width="120">
-    </el-table-column>
-    <el-table-column
-      prop="city"
-      label="City"
-      width="120">
-    </el-table-column>
-    <el-table-column
-      prop="address"
-      label="Address"
-      width="300">
-    </el-table-column>
-    <el-table-column
-      prop="zip"
-      label="Zip"
-      width="120">
-    </el-table-column>
-    <el-table-column
-      fixed="right"
-      label="Operations"
-      width="120">
-      <template slot-scope="scope">
-        <el-button @click="handleClick" type="text" size="small">Detail</el-button>
-        <el-button type="text" size="small">Edit</el-button>
-      </template>
-    </el-table-column>
-  </el-table>
+  <div class="container-fluid">
+    <navmenu></navmenu>
+    <el-table
+      :data="list"
+      style="width: 100%"
+    >
+      <el-table-column
+        fixed
+        prop="date"
+        label="Date"
+        width="150">
+          <template slot-scope="scope">
+            <span>{{ scope.row.date }}</span>
+          </template>
+      </el-table-column>
+      <el-table-column
+        prop="project_name"
+        label="Project">
+          <template slot-scope="scope">
+            <span>{{ scope.row.project_name }}</span>
+          </template>
+      </el-table-column>
+      <el-table-column
+        prop="total"
+        label="Total">
+          <template slot-scope="scope">
+            <span>{{ scope.row.total }}</span>
+          </template>
+      </el-table-column>
+      <el-table-column
+        prop="payment_status"
+        label="Payment Status">
+          <template slot-scope="scope">
+            <span>{{ scope.row.payment_status }}</span>
+          </template>
+      </el-table-column>
+
+      <el-table-column
+        prop="total_discount"
+        label="Discount">
+          <template slot-scope="scope">
+            <span>{{ scope.row.total_discount }}</span>
+          </template>
+      </el-table-column>
+
+      <el-table-column
+        fixed="right"
+        label="Operations">
+        <template slot-scope="scope">
+          <router-link :to="'/orders/edit/' + scope.row.id">
+            <el-button
+              type="primary"
+              size="small"
+              icon="el-icon-edit"
+            >
+              Edit
+            </el-button>
+          </router-link>
+
+            <el-button
+              type="warning"
+              size="small"
+              icon="el-icon-info"
+            >
+              Detail
+            </el-button>
+
+          <!-- <el-button @click="handleClick" type="text" size="small">Detail</el-button> -->
+        </template>
+      </el-table-column>
+    </el-table>
+
+  </div>
 </template>
 
 
 <script>
+  import axios from 'axios';
+  import navmenu from '../navmenu.vue'
   export default {
+    components: {
+      navmenu
+    },
     methods: {
       handleClick() {
         console.log('click');
@@ -55,41 +89,23 @@
     },
     data() {
       return {
-        tableData: [{
-          date: '2016-05-03',
-          name: 'Tom',
-          state: 'California',
-          city: 'Los Angeles',
-          address: 'No. 189, Grove St, Los Angeles',
-          zip: 'CA 90036',
-          tag: 'Home'
-        }, {
-          date: '2016-05-02',
-          name: 'Tom',
-          state: 'California',
-          city: 'Los Angeles',
-          address: 'No. 189, Grove St, Los Angeles',
-          zip: 'CA 90036',
-          tag: 'Office'
-        }, {
-          date: '2016-05-04',
-          name: 'Tom',
-          state: 'California',
-          city: 'Los Angeles',
-          address: 'No. 189, Grove St, Los Angeles',
-          zip: 'CA 90036',
-          tag: 'Home'
-        }, {
-          date: '2016-05-01',
-          name: 'Tom',
-          state: 'California',
-          city: 'Los Angeles',
-          address: 'No. 189, Grove St, Los Angeles',
-          zip: 'CA 90036',
-          tag: 'Office'
-        }]
+        list: [],
+        total: 0,
+        loading: true,
+        downloading: false,
       }
-    }
+    },
+    mounted(){
+      console.log('mounted Order List');
+      axios.get('api/orders')
+            .then(response => {
+              this.list = response.data.data;
+              console.log('list: ', this.list, response);
+            }).catch(error => {
+              console.log(error);
+            });
+    },
+
   }
 </script>
 

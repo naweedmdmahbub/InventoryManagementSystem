@@ -3,10 +3,6 @@ import VueRouter from 'vue-router'
 
 Vue.use(VueRouter)
 
-// import OrderList from './components/Orders/List.vue'
-// import OrderForm from './components/Orders/Form.vue'
-// import OrderCreate from './components/Orders/Create.vue'
-// import OrderEdit from './components/Orders/Edit.vue'
 
 const routes = [
   {
@@ -27,7 +23,7 @@ const routes = [
       name: 'OrderCreate',
   },
   {
-      path: '/orders/edit',
+      path: '/orders/edit/:id',
       component: () => import('./components/Orders/Edit.vue'),
       // component: OrderEdit,
       name: 'OrderEdit',
