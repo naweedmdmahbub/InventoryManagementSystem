@@ -61,6 +61,12 @@
                                     <p>Roles</p>
                                 </a>
                             </li>
+                            <li class="nav-item">
+                                <a href="{{ route('suppliers.index') }}" class="nav-link">
+                                    <i class="fas fa-list"></i>
+                                    <p>Suppliers</p>
+                                </a>
+                            </li>
                         </ul>
                     </li>
                 @endif
