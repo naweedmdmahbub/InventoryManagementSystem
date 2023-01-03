@@ -3,11 +3,10 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Http\Resources\SupplierResource;
-use App\Models\Supplier;
-use Illuminate\Http\Request;
+use App\Http\Resources\MaterialResource;
+use App\Models\Material;
 
-class SupplierController extends Controller
+class MaterialController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,8 +15,11 @@ class SupplierController extends Controller
      */
     public function index()
     {
-        $suppliers = Supplier::all();
-        return SupplierResource::collection($suppliers);
+
+        $materials = Material::all();
+        // dd($materials);
+        // return MaterialResource::collection($materials->materialBy('id', 'asc')->paginate($limit));
+        return MaterialResource::collection($materials);
     }
 
 
@@ -31,4 +33,5 @@ class SupplierController extends Controller
     {
         //
     }
+
 }

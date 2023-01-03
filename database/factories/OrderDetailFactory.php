@@ -5,6 +5,7 @@
 use App\Models\Material;
 use App\Models\Order;
 use App\Models\OrderDetail;
+use App\Models\Unit;
 use Faker\Generator as Faker;
 
 $factory->define(OrderDetail::class, function (Faker $faker) {
@@ -16,6 +17,10 @@ $factory->define(OrderDetail::class, function (Faker $faker) {
         'material_id' => function () {
             // Get random material id
             return Material::inRandomOrder()->first()->id;
+        },
+        'unit_id' => function () {
+            // Get random material id
+            return Unit::inRandomOrder()->first()->id;
         },
         'quantity' => $this->faker->numberBetween($min = 1, $max = 5),
         'unit_price' => $this->faker->numberBetween($min = 10, $max = 100),

@@ -22,4 +22,7 @@ class Order extends Model
     public function project(){
         return $this->belongsTo(Project::class);
     }
+    public function supplier(){
+        return $this->belongsTo(Supplier::class);
+    }
 }

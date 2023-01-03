@@ -1,6 +1,20 @@
 <template>
   <div class="container-fluid">
     <navmenu></navmenu>
+    <el-row :gutter="20">
+      <el-col :span="6" :offset="18">
+          <router-link :to="'/orders/create'">
+            <el-button
+              type="primary"
+              size="medium"
+              icon="el-icon-plus"
+            >
+              Add New Order
+            </el-button>
+          </router-link>
+      </el-col>
+    </el-row>
+
     <el-table
       :data="list"
       style="width: 100%"
@@ -19,6 +33,13 @@
         label="Project">
           <template slot-scope="scope">
             <span>{{ scope.row.project_name }}</span>
+          </template>
+      </el-table-column>
+      <el-table-column
+        prop="supplier_name"
+        label="Supplier">
+          <template slot-scope="scope">
+            <span>{{ scope.row.supplier_name }}</span>
           </template>
       </el-table-column>
       <el-table-column

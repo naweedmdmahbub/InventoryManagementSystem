@@ -3,11 +3,10 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Http\Resources\SupplierResource;
-use App\Models\Supplier;
-use Illuminate\Http\Request;
+use App\Http\Resources\UnitResource;
+use App\Models\Unit;
 
-class SupplierController extends Controller
+class UnitController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,8 +15,8 @@ class SupplierController extends Controller
      */
     public function index()
     {
-        $suppliers = Supplier::all();
-        return SupplierResource::collection($suppliers);
+        $units = Unit::all();
+        return UnitResource::collection($units);
     }
 
 

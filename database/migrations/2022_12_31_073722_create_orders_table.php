@@ -26,7 +26,7 @@ class CreateOrdersTable extends Migration
             $table->double('total_discount')->nullable();
             $table->string('discount_type')->nullable();
             $table->unsignedInteger('created_by')->nullable();
-            $table->string('notes');
+            $table->string('notes')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

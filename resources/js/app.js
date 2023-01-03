@@ -8,8 +8,10 @@ require('./bootstrap');
 
 window.Vue = require('vue');
 
-import Element from 'element-ui'
-Vue.use(Element)
+import ElementUI from 'element-ui'
+import locale from 'element-ui/lib/locale/lang/en'
+
+Vue.use(ElementUI, { locale })
 
 
 /**

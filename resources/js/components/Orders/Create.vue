@@ -1,78 +1,49 @@
 <template>
-  <div class="form-container">
-    <el-form
-      ref="form"
-      :model="form"
-      label-position="left"
-      label-width="150px"
-    >
-          <el-form-item label="Activity name">
-            <el-input v-model="form.name"></el-input>
-          </el-form-item>
-          <el-form-item label="Activity zone">
-            <el-select v-model="form.region" placeholder="please select your zone">
-              <el-option label="Zone one" value="shanghai"></el-option>
-              <el-option label="Zone two" value="beijing"></el-option>
-            </el-select>
-          </el-form-item>
-          <el-form-item label="Activity time">
-            <el-col :span="11">
-              <el-date-picker type="date" placeholder="Pick a date" v-model="form.date1" style="width: 100%;"></el-date-picker>
-            </el-col>
-            <el-col class="line" :span="2">-</el-col>
-            <el-col :span="11">
-              <el-time-picker placeholder="Pick a time" v-model="form.date2" style="width: 100%;"></el-time-picker>
-            </el-col>
-          </el-form-item>
-          <el-form-item label="Instant delivery">
-            <el-switch v-model="form.delivery"></el-switch>
-          </el-form-item>
-          <el-form-item label="Activity type">
-            <el-checkbox-group v-model="form.type">
-              <el-checkbox label="Online activities" name="type"></el-checkbox>
-              <el-checkbox label="Promotion activities" name="type"></el-checkbox>
-              <el-checkbox label="Offline activities" name="type"></el-checkbox>
-              <el-checkbox label="Simple brand exposure" name="type"></el-checkbox>
-            </el-checkbox-group>
-          </el-form-item>
-          <el-form-item label="Resources">
-            <el-radio-group v-model="form.resource">
-              <el-radio label="Sponsor"></el-radio>
-              <el-radio label="Venue"></el-radio>
-            </el-radio-group>
-          </el-form-item>
-          <el-form-item label="Activity form">
-            <el-input type="textarea" v-model="form.desc"></el-input>
-          </el-form-item>
-          <el-form-item>
-            <el-button type="primary" @click="onSubmit">Create</el-button>
-            <el-button>Cancel</el-button>
-          </el-form-item>
-      </el-form>
-
+  <div>
+    <navmenu></navmenu>
+    <Form :mode="mode" v-if="isMounted" :order="order"></Form>
   </div>
+  
 </template>
 
 
 <script>
+  import navmenu from '../navmenu';
+  import Form from './Form';
   export default {
+    components: {navmenu, Form},
     data() {
       return {
-        form: {
-          name: '',
-          region: '',
-          date1: '',
-          date2: '',
-          delivery: false,
-          type: [],
-          resource: '',
-          desc: ''
+        order: {
+          date: "2023-01-01",
+          project_id: null,
+          project_id: null,
+          payment_status: null,
+          purchase_status: null,
+          total: 0.00,
+          paid: 0,
+          due: 0,
+          total_discount: 0,
+          discount_type: null,
+          notes: '',
+          details: [{
+            id: null,
+            order_id: null,
+            material_id: null,
+            quantity: 0,
+            unit_price: 0,
+            discount: 0,
+            discount_type: 'fixed',
+            total: 0,
+          }]
         },
-        previous: ''
+        mode: 'create',
+        isMounted: false,
       }
     },
     mounted(){
       console.log('mounted Create Order:', this.$route, this.$route.params);
+      this.isMounted = true;
     },
     methods: {
       onSubmit() {

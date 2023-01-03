@@ -17,6 +17,7 @@ class CreateOrderDetailsTable extends Migration
             $table->increments('id');
             $table->unsignedInteger('order_id');
             $table->unsignedInteger('material_id');
+            $table->unsignedInteger('unit_id');
             $table->double('quantity')->nullable();
             $table->double('unit_price')->nullable();
             $table->double('discount')->nullable();

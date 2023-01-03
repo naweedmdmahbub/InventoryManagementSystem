@@ -19,6 +19,7 @@ class OrderResource extends JsonResource
             'date' => $this->date,
             'project_id' => $this->project->id,
             'project_name' => $this->project->name,
+            'supplier_name' => $this->supplier->first_name.' '.$this->supplier->last_name,
             'payment_status' => $this->payment_status,
             'purchase_status' => $this->purchase_status,
             'total' => $this->total,

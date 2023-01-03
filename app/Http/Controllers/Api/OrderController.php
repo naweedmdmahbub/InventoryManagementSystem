@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreUpdateOrderRequest;
 use App\Http\Resources\OrderResource;
 use App\Models\Order;
 use Illuminate\Http\Request;
@@ -17,7 +18,7 @@ class OrderController extends Controller
     public function index()
     {
 
-        $orders = Order::with('orderDetails.material', 'project')->get();
+        $orders = Order::with('orderDetails.material', 'project', 'supplier')->get();
         // dd($orders);
         // return OrderResource::collection($orders->orderBy('id', 'asc')->paginate($limit));
         return OrderResource::collection($orders);
@@ -28,9 +29,10 @@ class OrderController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+        dd($request);
+        
     }
 
     /**

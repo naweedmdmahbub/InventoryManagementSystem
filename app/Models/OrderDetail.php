@@ -9,7 +9,7 @@ class OrderDetail extends Model
 {
     use SoftDeletes;
     protected $fillable = [
-        'order_id', 'material_id',
+        'order_id', 'material_id', 'unit_id',
         'quantity', 'unit_price', 'discount', 'discount_type', 'total'
     ];
 

@@ -3,11 +3,10 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Http\Resources\SupplierResource;
-use App\Models\Supplier;
-use Illuminate\Http\Request;
+use App\Http\Resources\ProjectResource;
+use App\Models\Project;
 
-class SupplierController extends Controller
+class ProjectController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,8 +15,11 @@ class SupplierController extends Controller
      */
     public function index()
     {
-        $suppliers = Supplier::all();
-        return SupplierResource::collection($suppliers);
+
+        $projects = Project::with('createdBy')->get();
+        // dd($projects);
+        // return ProjectResource::collection($projects->projectBy('id', 'asc')->paginate($limit));
+        return ProjectResource::collection($projects);
     }
 
 
@@ -31,4 +33,5 @@ class SupplierController extends Controller
     {
         //
     }
+
 }

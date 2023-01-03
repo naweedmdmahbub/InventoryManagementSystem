@@ -39,8 +39,9 @@ Route::group(['middleware' => ['auth']], function() {
     Route::resource('works', 'WorkController');
     Route::post('/works/delete/{id}', 'WorkController@delete')->name('works.delete');
 
-    Route::resource('orders', 'OrderController');
-    Route::post('/orders/delete/{id}', 'OrderController@delete')->name('orders.delete');
+    Route::get('/orders', 'OrderController@index')->name('orders.index');
+    // Route::resource('orders', 'OrderController');
+    // Route::post('/orders/delete/{id}', 'OrderController@delete')->name('orders.delete');
 
     Route::resource('project_users', 'ProjectUserController');
     Route::post('/project_users/delete/{id}', 'ProjectUserController@delete')->name('project_user.delete');

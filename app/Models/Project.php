@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -19,6 +20,11 @@ class Project extends Model
     protected $fillable = [
         'name', 'location', 'description', 'start_date', 'end_date', 'status', 'created_by'
     ];
+
+    public function createdBy(){
+        return $this->belongsTo(User::class, 'created_by');
+    }
+
 
     public static function getStatusID($status)
     {
