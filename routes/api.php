@@ -21,17 +21,15 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 
 Route::namespace('Api')->group(function() {
-    
-    // Route::group(['middleware' => 'auth:api'], function () {
+    Route::group(['middleware' => 'auth:sanctum'], function () {
         Route::apiResource('orders', 'OrderController');
         Route::get('/projects', 'ProjectController@index')->name('projectsApi.index');
         Route::get('/project/{id}', 'ProjectController@show')->name('projectsApi.show');
-        Route::get('/suppliers', 'SupplierController@index')->name('suppliers.index');
-        Route::get('/supplier/{id}', 'SupplierController@show')->name('suppliers.show');
-        Route::get('/units', 'UnitController@index')->name('units.index');
-        Route::get('/unit/{id}', 'UnitController@show')->name('units.show');
+        Route::get('/suppliers', 'SupplierController@index')->name('suppliersApi.index');
+        Route::get('/supplier/{id}', 'SupplierController@show')->name('suppliersApi.show');
+        Route::get('/units', 'UnitController@index')->name('unitsApi.index');
+        Route::get('/unit/{id}', 'UnitController@show')->name('unitsApiApi.show');
         Route::get('/materials', 'MaterialController@index')->name('materialsApi.index');
         Route::get('/material/{id}', 'MaterialController@show')->name('materialsApi.show');
-    // });
-
+    });
 });

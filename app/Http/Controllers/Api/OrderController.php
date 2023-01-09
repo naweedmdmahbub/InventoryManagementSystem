@@ -29,7 +29,7 @@ class OrderController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Request $request)
+    public function create(StoreUpdateOrderRequest $request)
     {
         dd($request);
         

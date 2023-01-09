@@ -118127,6 +118127,7 @@ window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.
 Vue.use(element_ui__WEBPACK_IMPORTED_MODULE_0___default.a, {
   locale: element_ui_lib_locale_lang_en__WEBPACK_IMPORTED_MODULE_1___default.a
 });
+axios.defaults.headers.post['Authorization'] = "Bearer ".concat(localStorage.getItem('access_token'));
 
 /**
  * The following block of code may be used to automatically register your
@@ -118188,7 +118189,17 @@ try {
  */
 
 window.axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+window.axios.defaults.withCredentials = true;
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+// axios.defaults.withCredentials = true
+// axios.defaults.baseURL = 'http://localhost:8001';
+
+var token = document.head.querySelector('meta[name="csrf-token"]');
+if (token) {
+  window.axios.defaults.headers.common['X-CSRF-TOKEN'] = token.content;
+} else {
+  console.error('CSRF token not found: https://laravel.com/docs/csrf#csrf-x-csrf-token', token);
+}
 
 /**
  * Echo exposes an expressive API for subscribing to channels and listening
