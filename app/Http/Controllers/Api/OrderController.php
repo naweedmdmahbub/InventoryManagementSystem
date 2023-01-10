@@ -7,12 +7,19 @@ use App\Http\Requests\StoreUpdateOrderRequest;
 use App\Http\Resources\OrderResource;
 use App\Models\Order;
 use App\Models\OrderDetail;
+use App\Repositories\OrderRepository;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class OrderController extends Controller
 {
+    protected $orderRepository;
+
+    public function __construct(OrderRepository $orderRepository)
+    {
+        $this->orderRepository = $orderRepository;
+    }
 
     /**
      * Display a listing of the resource.
@@ -26,16 +33,6 @@ class OrderController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //        
-    }
-
-    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -43,20 +40,9 @@ class OrderController extends Controller
      */
     public function store(StoreUpdateOrderRequest $request)
     {
-        // dd($request->all());
         try{
-            $input = $request->only('date', 'project_id', 'supplier_id', 'total', 'paid', 'due', 'total_discount', 'discount_type', 'notes');
-            if($input['total'] == $input['paid']){
-                $input['payment_status'] = 'paid';
-            } else if($input['total'] == $input['due']){
-                $input['payment_status'] = 'unpaid';
-            } else {
-                $input['payment_status'] = 'partially paid';
-            }
-            $input['created_by'] = auth()->user()->id;
             DB::beginTransaction();
-            $order = Order::create($input);
-            $this->saveOrderDetails($order, $request);
+            $this->orderRepository->createOrUpdateOrder($request, 'create');
             DB::commit();
         } catch (Exception $ex){
             DB::rollBack();
@@ -81,17 +67,6 @@ class OrderController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -100,18 +75,10 @@ class OrderController extends Controller
      */
     public function update(StoreUpdateOrderRequest $request, $id)
     {
-        // dd($id, $request->all());
         try {
-            $input = $request->only('date', 'project_id', 'supplier_id', 'total', 'paid', 'due', 'total_discount', 'discount_type', 'notes');
-            $order = Order::find($id);
             DB::beginTransaction();
-            $order->fill($input)->update();
-            if($request->deletedOrderDetailIDs){
-                DB::table("order_details")->whereIn('id',$request->deletedOrderDetailIDs)->delete();
-            }
-            $this->saveOrderDetails($order, $request);
+            $this->orderRepository->createOrUpdateOrder($request, 'update', $id);
             DB::commit();
-            return new OrderResource($order);
         } catch (Exception $ex) {
             DB::rollBack();
             return response()->json( new \Illuminate\Support\MessageBag(['catch_exception'=>$ex->getMessage()]), 403);
@@ -137,21 +104,6 @@ class OrderController extends Controller
         } catch (\Exception $ex) {
             DB::rollBack();
             response()->json(['error' => $ex->getMessage()], 403);
-        }
-    }
-
-    public function saveOrderDetails($order, $request)
-    {
-        foreach($request->details as $detail){
-            $input['material_id'] = $detail['material_id'];
-            $input['quantity'] = $detail['quantity'];
-            $input['unit_price'] = $detail['unit_price'];
-            $input['discount'] = $detail['discount'];
-            $input['discount_type'] = $detail['discount_type'];
-            $input['total'] = $detail['total'];
-            $input['unit_id'] = $detail['unit_id'];
-            $input['order_id'] = $order['id'];
-            isset($detail['id']) ? OrderDetail::where('id', $detail['id'])->update($input) : OrderDetail::create($input);
         }
     }
 
