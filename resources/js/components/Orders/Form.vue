@@ -10,12 +10,12 @@
           <el-form-item label="Date">
             <el-col :span="24">
               <el-date-picker type="date" placeholder="Pick a date" v-model="order.date"
-                        format="yyyy-MM-dd" value-format="yyyy-MM-dd" 
+                        format="yyyy-MM-dd" value-format="yyyy-MM-dd" :disabled="mode === 'view'"
               />
             </el-col>
           </el-form-item>
           <el-form-item label="Project">
-            <el-select v-model="order.project_id" placeholder="Please select project">
+            <el-select v-model="order.project_id" placeholder="Please select project" :disabled="mode === 'view'">
               <el-option v-for="project in projects"
                         :key="project.id" 
                         :label="project.name" 
@@ -23,7 +23,7 @@
             </el-select>
           </el-form-item>
           <el-form-item label="Supplier">
-            <el-select v-model="order.supplier_id" placeholder="Please select supplier">
+            <el-select v-model="order.supplier_id" placeholder="Please select supplier" :disabled="mode === 'view'">
               <el-option v-for="supplier in suppliers"
                         :key="supplier.id"
                         :label="supplier.full_name" 
@@ -32,27 +32,30 @@
           </el-form-item>
           
           <el-form-item label="Total">
-            <el-input v-model="order.total" placeholder="Please enter Total Amount" @change="calculateDue" />
+            <el-input v-model="order.total" placeholder="Please enter Total Amount"
+                      @change="calculateDue" :disabled="mode === 'view'" />
           </el-form-item>
           <el-form-item label="Paid">
-            <el-input v-model="order.paid" placeholder="Please enter Paid Amount" @change="calculateDue" />
+            <el-input v-model="order.paid" placeholder="Please enter Paid Amount"
+                      @change="calculateDue" :disabled="mode === 'view'" />
           </el-form-item>
           <el-form-item label="Due">
             <el-input v-model="order.due" placeholder="Please enter Due Amount" :disabled="true" />
           </el-form-item>
           <el-form-item label="Total Discount">
-            <el-input v-model="order.total_discount" placeholder="Please enter Discount Amount" />
+            <el-input v-model="order.total_discount" placeholder="Please enter Discount Amount" 
+                      @change="totalCalculated" :disabled="mode === 'view'" />
           </el-form-item>
           
           <el-form-item label="Discount Type">
-            <el-radio-group v-model="order.discount_type">
+            <el-radio-group v-model="order.discount_type" :disabled="mode === 'view'">
               <el-radio label="Percentage"></el-radio>
               <el-radio label="Fixed"></el-radio>
             </el-radio-group>
           </el-form-item>
 
           <el-form-item label="Notes">
-            <el-input type="textarea" v-model="order.notes"></el-input>
+            <el-input type="textarea" v-model="order.notes" :disabled="mode === 'view'"></el-input>
           </el-form-item>
 
           <h2>Details</h2>
@@ -71,8 +74,9 @@
           <el-button v-if="mode !== 'view'" type="info" @click="addItem">Add Detail</el-button>
 
           <el-form-item>
-            <el-button type="primary" @click="onSubmit">Create</el-button>
-            <el-button>Cancel</el-button>
+            <el-button type="primary" @click="onSubmit" v-if="mode === 'create'">Create</el-button>
+            <el-button type="primary" @click="onSubmit" v-if="mode === 'edit'">Update</el-button>
+            <el-button v-if="mode !== 'view'">Cancel</el-button>
           </el-form-item>
       </el-form>
   </div>
@@ -130,8 +134,8 @@
         console.log('calculateDue: ', this.order);
       },
       addItem(){
-        var obj;
-        this.order.details.push(this.detail);
+        var obj = JSON.parse(JSON.stringify(this.detail));
+        this.order.details.push(obj);
       },
       totalCalculated(){
         let total = 0;
@@ -139,7 +143,7 @@
           total += element.total;
         });
         console.log('total after foreach: ',total);
-        this.order.total = total;
+        this.order.total = total - this.order.total_discount;
         this.calculateDue();
       },
       onSubmit() {
@@ -156,7 +160,7 @@
             })
             .catch(error => {
               console.log('error:', error);
-              showErrors(error);
+              // showErrors(error);
             });
         } else {
           console.log('onSubmit:', this.order);

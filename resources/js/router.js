@@ -31,6 +31,13 @@ const routes = [
       // component: OrderEdit,
       name: 'OrderEdit',
       meta: { noCache: true },
+  },
+  {
+      path: '/orders/view/:id',
+      component: () => import('./components/Orders/View.vue'),
+      // component: OrderView,
+      name: 'OrderView',
+      meta: { noCache: true },
   }
 ]
 

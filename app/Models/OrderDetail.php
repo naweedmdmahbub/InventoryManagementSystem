@@ -15,10 +15,13 @@ class OrderDetail extends Model
 
 
     public function order(){
-        return $this->belongsTo(OrderDetail::class);
+        return $this->belongsTo(Order::class);
     }
 
     public function material(){
         return $this->belongsTo(Material::class);
+    }
+    public function unit(){
+        return $this->belongsTo(Unit::class);
     }
 }

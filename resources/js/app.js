@@ -10,6 +10,8 @@ window.Vue = require('vue');
 
 import ElementUI from 'element-ui'
 import locale from 'element-ui/lib/locale/lang/en'
+import './styles/custom.css';
+
 
 Vue.use(ElementUI, { locale })
 axios.defaults.headers.post['Authorization'] = `Bearer ${localStorage.getItem('access_token')}`;

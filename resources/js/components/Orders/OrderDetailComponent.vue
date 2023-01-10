@@ -53,6 +53,10 @@
               </el-form-item>
           </el-col>
       </el-row>
+
+      <el-form-item>
+        <el-button v-if="mode !== 'view'" type="danger" @click.prevent="removeOrderDetail(orderDetail)">Delete</el-button>
+      </el-form-item>
     </div>
 </template>
 
@@ -76,11 +80,11 @@ export default {
       this.orderDetail.total = parseFloat(this.orderDetail.unit_price * this.orderDetail.quantity - this.orderDetail.discount);
       this.$emit('calculateTotal');
     },
-    removeBuildingElement(item) {
-      var index = this.order.orderDetails.indexOf(item);
-      console.log('removeBuildingElement: ', this.order, item, item.id, index, this.order.deletedOrderDetailIDs);
+    removeOrderDetail(item) {
+      console.log('removeOrderDetail: ', this.order, item, item.id, index, this.order.deletedOrderDetailIDs);
+      var index = this.order.details.indexOf(item);
       this.order.deletedOrderDetailIDs.push(item.id);
-      this.order.orderDetails.splice(index, 1);
+      this.order.details.splice(index, 1);
     },
   }
 }

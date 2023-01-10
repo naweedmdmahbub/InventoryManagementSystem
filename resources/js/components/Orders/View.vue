@@ -15,18 +15,17 @@
     data() {
       return {
         order: {},
-        mode: 'edit',
+        mode: 'view',
         isMounted: false,
       }
     },
     async mounted(){
       await axios.get('/api/orders/'+this.$route.params.id)
                       .then(response => {
-                        console.log('Order Edit response:', response.data.data);
+                        console.log('Order View response:', response.data.data);
                         this.order = response.data.data;
-                        this.order.deletedOrderDetailIDs = [];
                       });
-      console.log('mounted Edit Order:', this.$route, this.$route.params);
+      console.log('mounted View Order:', this.$route, this.$route.params);
       this.isMounted = true;
     }
   }

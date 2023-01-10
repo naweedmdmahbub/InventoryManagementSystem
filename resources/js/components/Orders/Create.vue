@@ -35,7 +35,8 @@
             discount: 0,
             discount_type: 'fixed',
             total: 0,
-          }]
+          }],
+          deletedOrderDetailIDs: []
         },
         mode: 'create',
         isMounted: false,

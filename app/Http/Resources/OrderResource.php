@@ -18,6 +18,7 @@ class OrderResource extends JsonResource
             'id' => $this->id,
             'date' => $this->date,
             'project_id' => $this->project->id,
+            'supplier_id' => $this->supplier->id,
             'project_name' => $this->project->name,
             'supplier_name' => $this->supplier->first_name.' '.$this->supplier->last_name,
             'payment_status' => $this->payment_status,
@@ -29,7 +30,8 @@ class OrderResource extends JsonResource
             'discount_type' => $this->discount_type,
             'notes' => $this->notes,
             'created_by' => $this->created_by,
-            'orderDetials' => OrderDetailResource::collection($this->whenLoaded('orderDetials')),
+            'details' => OrderDetailResource::collection($this->whenLoaded('orderDetails')),
+            // 'details' => OrderDetailResource::collection($this->orderDetails),
         ];
     }
 }

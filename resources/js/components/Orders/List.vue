@@ -79,12 +79,23 @@
             </el-button>
           </router-link>
 
+          <router-link :to="'/orders/view/' + scope.row.id">
             <el-button
               type="warning"
               size="small"
               icon="el-icon-info"
             >
               Detail
+            </el-button>
+          </router-link>
+
+            <el-button
+              type="danger"
+              size="small"
+              icon="el-icon-delete"
+              @click="handleDelete(scope.row.id);"
+            >
+              Delete
             </el-button>
 
           <!-- <el-button @click="handleClick" type="text" size="small">Detail</el-button> -->
@@ -106,6 +117,38 @@
     methods: {
       handleClick() {
         console.log('click');
+      },
+      getList(){
+        axios.get('api/orders')
+              .then(response => {
+                this.list = response.data.data;
+                console.log('list: ', this.list, response);
+              }).catch(error => {
+                console.log(error);
+              });
+      },
+      handleDelete(id) {
+          this.$confirm('This will permanently delete Order#' + id + '. Continue?', 'Warning', {
+            confirmButtonText: 'OK',
+            cancelButtonText: 'Cancel',
+            type: 'warning',
+          }).then(() => {
+              axios.delete('/api/orders/'+id)
+                      .then(response => {
+                        this.$message({
+                          type: 'success',
+                          message: 'Delete completed',
+                        });
+                        this.getList();
+                      }).catch(error => {
+                        console.log(error);
+                      });
+          }).catch(() => {
+            this.$message({
+              type: 'info',
+              message: 'Delete canceled',
+            });
+          });
       }
     },
     data() {
@@ -118,13 +161,7 @@
     },
     mounted(){
       console.log('mounted Order List');
-      axios.get('api/orders')
-            .then(response => {
-              this.list = response.data.data;
-              console.log('list: ', this.list, response);
-            }).catch(error => {
-              console.log(error);
-            });
+      this.getList();
     },
 
   }
