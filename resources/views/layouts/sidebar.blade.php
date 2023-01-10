@@ -115,6 +115,12 @@
                                     <p>Orders</p>
                                 </a>
                             </li>
+                            <li class="nav-item">
+                                <a href="{{ route('manpowers.index') }}" class="nav-link">
+                                    <i class="fas fa-list"></i>
+                                    <p>Manpowers</p>
+                                </a>
+                            </li>
                         </ul>
                     </li>
                 @endif

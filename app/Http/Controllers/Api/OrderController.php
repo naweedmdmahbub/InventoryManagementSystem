@@ -126,7 +126,18 @@ class OrderController extends Controller
      */
     public function destroy($id)
     {
-        //
+        try {
+            // DB::table("order_details")->where('order_id',$id)->delete();
+            $order = Order::find($id);
+            DB::beginTransaction();
+            $order->orderDetails()->delete();
+            $order->delete();
+            DB::commit();
+            return response()->json(null, 204);
+        } catch (\Exception $ex) {
+            DB::rollBack();
+            response()->json(['error' => $ex->getMessage()], 403);
+        }
     }
 
     public function saveOrderDetails($order, $request)

@@ -23,6 +23,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::namespace('Api')->group(function() {
     Route::group(['middleware' => 'auth:sanctum'], function () {
         Route::apiResource('orders', 'OrderController');
+        Route::apiResource('manpowers', 'ManpowerController');
         Route::get('/projects', 'ProjectController@index')->name('projectsApi.index');
         Route::get('/project/{id}', 'ProjectController@show')->name('projectsApi.show');
         Route::get('/suppliers', 'SupplierController@index')->name('suppliersApi.index');

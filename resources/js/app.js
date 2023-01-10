@@ -28,13 +28,7 @@ axios.defaults.headers.post['Authorization'] = `Bearer ${localStorage.getItem('a
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
-Vue.component('example-component', require('./components/ExampleComponent.vue').default);
-
-Vue.component('order-list', require('./components/Orders/List.vue').default);
-Vue.component('order-create', require('./components/Orders/Create.vue').default);
-// Vue.component('order-edit', require('./components/Orders/Edit.vue').default);
-Vue.component('order-form', require('./components/Orders/Form.vue').default);
-
+// Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

@@ -14,37 +14,38 @@ const routes = [
   {
       path: '/orders/form',
       component: () => import('./components/Orders/Form.vue'),
-      // component: OrderForm,
       name: 'OrderForm',
       meta: { noCache: true },
   },
   {
       path: '/orders/create',
       component: () => import('./components/Orders/Create.vue'),
-      // component: OrderCreate,
       name: 'OrderCreate',
       meta: { noCache: true },
   },
   {
       path: '/orders/edit/:id',
       component: () => import('./components/Orders/Edit.vue'),
-      // component: OrderEdit,
       name: 'OrderEdit',
       meta: { noCache: true },
   },
   {
       path: '/orders/view/:id',
       component: () => import('./components/Orders/View.vue'),
-      // component: OrderView,
       name: 'OrderView',
       meta: { noCache: true },
-  }
+  },
+  {
+      path: '/manpowers',
+      component: () => import('./components/Manpowers/List.vue'),
+      name: 'ManpowerList',
+      meta: { noCache: true },
+  },
 ]
 
 
 const router = new VueRouter({
     routes, // short for `routes: routes`,
-    hashbang: false,
     mode: 'history'
 })
 

@@ -40,6 +40,7 @@ Route::group(['middleware' => ['auth']], function() {
     Route::post('/works/delete/{id}', 'WorkController@delete')->name('works.delete');
 
     Route::get('/orders', 'OrderController@index')->name('orders.index');
+    Route::get('/manpowers', 'ManpowerController@index')->name('manpowers.index');
     // Route::resource('orders', 'OrderController');
     // Route::post('/orders/delete/{id}', 'OrderController@delete')->name('orders.delete');
 
