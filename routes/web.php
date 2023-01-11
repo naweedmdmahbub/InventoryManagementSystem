@@ -24,6 +24,8 @@ Route::group(['middleware' => ['auth']], function() {
     Route::resource('roles', 'RoleController');
     Route::post('/roles/delete/{id}', 'RoleController@delete')->name('roles.delete');
     Route::get('/roles/check_users/{id}', 'RoleController@checkUsers')->name('roles.checkUsers');
+    Route::resource('suppliers', 'SupplierController');
+    Route::post('/suppliers/delete/{id}', 'SupplierController@delete')->name('suppliers.delete');
     Route::resource('categories', 'CategoryController');
     Route::post('/categories/delete/{id}', 'CategoryController@delete')->name('categories.delete');
     Route::resource('units', 'UnitController');
@@ -36,6 +38,11 @@ Route::group(['middleware' => ['auth']], function() {
     Route::post('/structures/delete/{id}', 'StructureController@delete')->name('structures.delete');
     Route::resource('works', 'WorkController');
     Route::post('/works/delete/{id}', 'WorkController@delete')->name('works.delete');
+
+    Route::get('/orders', 'OrderController@index')->name('orders.index');
+    Route::get('/manpowers', 'ManpowerController@index')->name('manpowers.index');
+    // Route::resource('orders', 'OrderController');
+    // Route::post('/orders/delete/{id}', 'OrderController@delete')->name('orders.delete');
 
     Route::resource('project_users', 'ProjectUserController');
     Route::post('/project_users/delete/{id}', 'ProjectUserController@delete')->name('project_user.delete');

@@ -61,6 +61,12 @@
                                     <p>Roles</p>
                                 </a>
                             </li>
+                            <li class="nav-item">
+                                <a href="{{ route('suppliers.index') }}" class="nav-link">
+                                    <i class="fas fa-list"></i>
+                                    <p>Suppliers</p>
+                                </a>
+                            </li>
                         </ul>
                     </li>
                 @endif
@@ -101,6 +107,18 @@
                                 <a href="{{ route('works.index') }}" class="nav-link">
                                     <i class="fas fa-list"></i>
                                     <p>Works</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{ route('orders.index') }}" class="nav-link">
+                                    <i class="fas fa-list"></i>
+                                    <p>Orders</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{ route('manpowers.index') }}" class="nav-link">
+                                    <i class="fas fa-list"></i>
+                                    <p>Manpowers</p>
                                 </a>
                             </li>
                         </ul>

@@ -63742,11 +63742,11 @@ var ElementWriter = __webpack_require__(450);
  * - page-breaks (it adds new pages when there's not enough space left),
  * - repeatable fragments (like table-headers, which are repeated everytime
  *                         a page-break occurs)
- * - transactions (used for unbreakable-blocks when we want to make sure
+ * - manpowers (used for unbreakable-blocks when we want to make sure
  *                 whole block will be rendered on the same page)
  */
 function PageElementWriter(context, tracker) {
-	this.transactionLevel = 0;
+	this.manpowerLevel = 0;
 	this.repeatables = [];
 	this.tracker = tracker;
 	this.writer = new ElementWriter(context, tracker);
@@ -63832,14 +63832,14 @@ PageElementWriter.prototype.moveToNextPage = function (pageOrientation) {
 };
 
 PageElementWriter.prototype.beginUnbreakableBlock = function (width, height) {
-	if (this.transactionLevel++ === 0) {
+	if (this.manpowerLevel++ === 0) {
 		this.originalX = this.writer.context.x;
 		this.writer.pushContext(width, height);
 	}
 };
 
 PageElementWriter.prototype.commitUnbreakableBlock = function (forcedX, forcedY) {
-	if (--this.transactionLevel === 0) {
+	if (--this.manpowerLevel === 0) {
 		var unbreakableContext = this.writer.context;
 		this.writer.popContext();
 

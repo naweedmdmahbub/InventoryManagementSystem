@@ -13,20 +13,17 @@ class Material extends Model
     ];
 
 
-    public function category()
-    {
+    public function category(){
         return $this->belongsTo(Category::class);
     }
-
-    public function unit()
-    {
+    public function unit(){
         return $this->belongsTo(Unit::class);
     }
+    public function orderDetails(){
+        return $this->hasMany(OrderDetail::class);
+    }
 
-
-
-    public function image()
-    {
+    public function image(){
         return $this->morphOne(Image::class, 'imageable');
     }
 }
