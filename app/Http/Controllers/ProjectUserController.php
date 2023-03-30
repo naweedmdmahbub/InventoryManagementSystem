@@ -60,6 +60,8 @@ class ProjectUserController extends Controller
         //
     }
 
+
+
     /**
      * Show the form for editing the specified resource.
      *
@@ -68,29 +70,37 @@ class ProjectUserController extends Controller
      */
     public function edit($id)
     {
-
+//        dd('hi');
         if (!auth()->user()->can('products.edit')) {
             abort(403, 'Unauthorized action.');
         }
 
         $project = Project::find($id);
-        $roles = Role::where('name','>',3)->get();
-        $project_users = User::all();
+        $roles = Role::where('name', 'like', '%#'.$id.'%')->get();
+//        $project_users = User::all();
+//        $project_users = $project->projectUsers;
+        $project_users = $project->projectUsers()->with('user')->get();
+        $project_users = User::where('fullname','Naweed')->get();
+//        $project_users = $project->projectUsers()->with('roles')->get();
+//        $project_users = $project->projectUsers()->with([
+//            'roles' => function ($query) use($id) {
+//                $query->where('role',$id);
+//            }
+//        ])->get();
+//        dd($project_users);
         $users = User::all();
-//        $project_users = ProjectUser::where()->get();
-//        dd($project,$roles,$users);
+//        dd($project,$roles,$users,$project_users);
         if (!$project){
             Toastr::warning('ProjectUser Edit Failed');
             return redirect('project_users');
         }
         return view('project_users.edit', compact('project_users','project','roles','users'));
 
-
-
-
 //        $project_user = new ProjectUser();
         return view('project_users.edit', compact('project_user','projects','roles','users'));
     }
+
+
 
     /**
      * Update the specified resource in storage.

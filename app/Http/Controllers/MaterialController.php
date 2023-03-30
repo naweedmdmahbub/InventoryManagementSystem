@@ -62,6 +62,7 @@ class MaterialController extends Controller
      */
     public function store(StoreUpdateMaterialRequest $request)
     {
+        dd($request->all());
         if (!auth()->user()->can('products.create')) {
             abort(403, 'Unauthorized action.');
         }

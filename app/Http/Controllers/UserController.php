@@ -92,6 +92,10 @@ class UserController extends Controller
 
         $roles = Role::all();
         $user = User::with('roles')->find($id);
+        if (!$user){
+            Toastr::warning('User Edit Failed');
+            return redirect('users');
+        }
         return view('users.view', compact('user','roles'));
     }
 
@@ -109,6 +113,10 @@ class UserController extends Controller
 
         $roles = Role::all();
         $user = User::find($id);
+        if (!$user){
+            Toastr::warning('User Edit Failed');
+            return redirect('users');
+        }
         return view('users.edit', compact('user','roles'));
     }
 

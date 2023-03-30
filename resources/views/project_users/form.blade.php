@@ -16,26 +16,29 @@
 
     <div class="form-group row project_user-repeater" id="project_user">
         <div class="col-sm-2">
-            <input data-repeater-create type="button" class="btn btn-info" value="Add Schedule"/>
+            <input data-repeater-create type="button" class="btn btn-info" value="Add Project User"/>
         </div>
         <div data-repeater-list="project_user" class="col-sm-10">
             <div data-repeater-item >
 
+                {{--@php dd($users); @endphp--}}
                 <div class="form-group row">
                     <label for="user_id" class="col-sm-1 col-form-label">User</label>
-                    <select class="form-control col-sm-3 user" name="user_id" onchange="changeTimeslot(this);">
-                        @foreach($project_users as $project_user)
-                            <option value="{{ $project_user->id }}" @if(isset($project_user->timeslot) && $project_user->timeslot->id == $project_user->id) selected @endif>
-
+                    <select class="form-control col-sm-3 user" name="user_id" onchange="changeUser(this);">
+                        @foreach($users as $user)
+{{--                            <option value="{{ $user->id }}" @if(isset($user->id) && $user->id == $project_user->id) selected @endif>--}}
+{{--                                {{ $project_user->username }}--}}
+                            <option value="{{ $user->id }}" @if(isset($user->id)) selected @endif>
+                                {{ $user->username }}
                             </option>
                         @endforeach
                     </select>
 
                     <label for="project_id" class="col-sm-1 col-form-label">Role</label>
-                    <select class="form-control col-sm-3 project" name="project_id" onchange="changeRole(this)">
+                    <select class="form-control col-sm-3 project" name="role_id" onchange="changeRole(this)">
                         @foreach($roles as $role)
                             <option value="{{ $role->id }}" @if(isset($role->id)) selected @endif>
-                                {{ $role->id }}
+                                {{ $role->name }}
                             </option>
                         @endforeach
                     </select>
@@ -61,7 +64,7 @@
             initEmpty: true,
             defaultValues: {
                 'user_id': null,
-                'project_id': null,
+                'role_id': null,
             },
             show: function () {
                 console.log('project_user-repeater');
@@ -75,16 +78,28 @@
             isFirstItemUndeletable: true
         });
 
-        @if(basename(request()->path()) === 'edit')
-            var myObj = JSON.parse('{!!  json_encode($project_users)  !!}');
-            console.log(myObj)
-            $repeater.setList(myObj);
-        @endif
+        {{--@if(basename(request()->path()) === 'edit')--}}
+            {{--var myObj = JSON.parse('{!!  json_encode($project_users)  !!}');--}}
+            {{--console.log(myObj)--}}
+            {{--if(isEmpty(myObj)){--}}
+                {{--myObj = {--}}
+                    {{--'user_id': null,--}}
+                    {{--'role_id': null,--}}
+                {{--}--}}
+                {{--console.log('myObj is empty')--}}
+            {{--}--}}
+            {{--console.log('aaaaaaaaa  ',myObj)--}}
+            {{--$repeater.setList(myObj);--}}
+        {{--@endif--}}
 
     });
 
 
-    function changeTimeslot(val){
+    function isEmpty(obj) {
+        return Object.keys(obj).length === 0;
+    }
+
+    function changeUser(val){
         console.log(val.value)
         var myFormObj = $('.project_user-repeater').repeaterVal();
     }

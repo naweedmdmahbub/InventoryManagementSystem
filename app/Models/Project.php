@@ -40,4 +40,19 @@ class Project extends Model
     {
         return self::STATUSES;
     }
+
+
+    public function projectUsers()
+    {
+        return $this->hasMany(ProjectUser::class);
+    }
+    public function users()
+    {
+        return $this->belongsToMany(User::class,'project_users');
+    }
+
+//    public function users()
+//    {
+//        return $this->hasManyThrough(User::class,ProjectUser::class);
+//    }
 }
